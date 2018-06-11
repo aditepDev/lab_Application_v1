@@ -1,5 +1,5 @@
-# 1.MVC
-## 1.binding
+# 1.mvc structure
+## 1.1.binding
 
 * 1.1 เรียกใช้  binding
 
