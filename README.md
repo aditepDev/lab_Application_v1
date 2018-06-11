@@ -4,6 +4,7 @@
 * 1.1 เรียกใช้  binding
 
 #### app/gradle
+
 ```
  dataBinding{enabled true}
 ```
@@ -14,12 +15,12 @@
 
 #### /java/package
 
+
 #### activity
 #### manager
 #### util
 #### view 
 #### fragment
-
 
 * 1.2.2 สร้าง MainApplication.java 
 
@@ -71,13 +72,13 @@ MainApplication.java
 
 #### fragment
 
-- fragmenttemplate
+- fragmenttemplate.java
 
 #### view
 
-- customviewtemplate
+- customviewtemplate.java
 
-- customviewgrouptemplate
+- customviewgrouptemplate.java
 
 ## 1.5.create fragment_main
 
