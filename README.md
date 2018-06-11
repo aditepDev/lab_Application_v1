@@ -3,7 +3,7 @@
 
 * 1.1 เรียกใช้  binding
 
-- app/gradle
+#### app/gradle
 ```
  dataBinding{enabled true}
 ```
@@ -27,13 +27,19 @@
 ## 3.liberry
 
 * 3.1 เรียกใช้ liberry
-
+#### settings.gradle
 ```
--" ,':TheCheeseLibrary'  " -->  add library
+-" ,':TheCheeseLibrary'  "
 ```
+   * 3.1.1  add library เข้า ไปใน app
+   #### app/gradle
+   ```
+   implementation project(':TheCheeseLibrary')
+   ```
 
 * 3.2 ใช้ Contextor ที่  MainApplication
 
+#### MainApplication.java 
 ```
  -MainApp,onCreate --> { Contextor.getInstance().init(getApplicationContext()); }
 ```
@@ -47,13 +53,13 @@
 ```
 
 ## 5.create fragment_main
-
+#### res/layout
 * 5.1 สร้าง fragment เพื่อใช้ แทน activity_main
 
 ```
 create fragment_main.xml --> layout  xml
 ```
-
+#### fragment
 * 5.2 ก๊อปปี้ template fragmentTemplat เปลี่ยนชื่อเป็น MainFragment
 
 ```
@@ -64,7 +70,17 @@ create MainFragment.class --> fragment java
 
 * 6.1 add fragment เข้าไปที่ activity
 
--MainActivity.class
+#### activity_main.xml
+
+``` 
+ 	  <FrameLayout
+            android:id="@+id/contentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+```
+
+#### MainActivity.class
 
 ```  
   if (savedInstanceState == null){
@@ -74,26 +90,21 @@ create MainFragment.class --> fragment java
         }
 	 
 ``` 
--activity_main.xml
 
-``` 
- 	  <FrameLayout
-            android:id="@+id/contentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-```
 # 2.MENU
 
-## 1.change color values/color
+## 1.change color 
 
-* 2.1.1. เปลี่ยนสี ที่  ``` values/color ```
+#### values/color
+
+* 2.1.1. เปลี่ยนสี 
+#### values/color
 
 ## 2.menu
 
 * 2.2.1 สร้างเมนู ที่ activity_main.xml
 
-/activity_main.xml
+#### activity_main.xml
 
  * 2.2.3 add menu
  
