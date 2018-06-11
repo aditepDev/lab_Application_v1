@@ -28,37 +28,37 @@
  android:name=".MainApplication"
 ```
 
-## 3.liberry
+## 1.3.liberry
 
-* 3.1 เรียกใช้ liberry
+* 1.3.1 เรียกใช้ liberry
 #### settings.gradle
 ```
 -" ,':TheCheeseLibrary'  "
 ```
-   * 3.1.1  add library เข้า ไปใน app
+   * 1.3.1.1  add library เข้า ไปใน app
    #### app/gradle
    ```
    implementation project(':TheCheeseLibrary')
    ```
 
-* 3.2 ใช้ Contextor ที่  MainApplication
+* 1.3.2 ใช้ Contextor ที่  MainApplication
 
 #### MainApplication.java 
 ```
  -MainApp,onCreate --> { Contextor.getInstance().init(getApplicationContext()); }
 ```
 
-## 4.copy template
+## 1.4.copy template
 
-* 4.1 ก๊อปปี้ template จาก libarry
+* 1.4.1 ก๊อปปี้ template จาก libarry
 
 ```
 -singleton -fragment -customview -customviewgroup
 ```
 
-## 5.create fragment_main
+## 1.5.create fragment_main
 #### res/layout
-* 5.1 สร้าง fragment เพื่อใช้ แทน activity_main
+* 1.5.1 สร้าง fragment เพื่อใช้ แทน activity_main
 
 ```
 create fragment_main.xml --> layout  xml
@@ -70,9 +70,9 @@ create fragment_main.xml --> layout  xml
 create MainFragment.class --> fragment java
 ```
 
-## 6.add mainfragment to mainactivity 
+## 1.6.add mainfragment to mainactivity 
 
-* 6.1 add fragment เข้าไปที่ activity
+* 1.6.1 add fragment เข้าไปที่ activity
 
 #### activity_main.xml
 
@@ -97,14 +97,14 @@ create MainFragment.class --> fragment java
 
 # 2.MENU
 
-## 1.change color 
+## 2.1.change color 
 
 #### values/color
 
 * 2.1.1. เปลี่ยนสี 
 #### values/color
 
-## 2.menu
+## 2.2.menu
 
 * 2.2.1 สร้างเมนู ที่ activity_main.xml
 
