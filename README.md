@@ -38,9 +38,9 @@ MainApplication.java
  android:name=".MainApplication"
 ```
 
-## 1.3.liberry
+## 1.3.library
 
-* 1.3.1 เรียกใช้ liberry
+* 1.3.1 เรียกใช้ library
 #### settings.gradle
 ```
  ,':TheCheeseLibrary'  
