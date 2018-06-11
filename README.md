@@ -12,15 +12,22 @@
 
 * 2.1 สร้าง package รูปแบบ MVC
 
-```
--activity -manager -util -view -fragment
-```
+#### /java/package
+
+#### activity
+#### manager
+#### util
+#### view 
+#### fragment
+
 
 * 1.2.2 สร้าง MainApplication.java 
 
-```
--create MainApplication.java
-```
+#### java/app
+
+-create 
+MainApplication.java
+
 * 1.2.3 add MainApplication
 #### androidmanifest.xml
 
