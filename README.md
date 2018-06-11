@@ -1,6 +1,6 @@
 # lab_Application_v1
 
-#1.MVC
+# 1.MVC
 ========1.binding=============================
 
 //1.1 เรียกใช้  binding
@@ -65,7 +65,7 @@ create MainFragment.class --> fragment java
             android:layout_height="match_parent"/>
 
 
-#2.MENU
+# 2.MENU
 
 ========1.change color=========
 
@@ -101,6 +101,7 @@ activity_main
                       values = <dimen name="drawer_menu_width">240dp</dimen>
 		      
 =======3.Hamburger icon=====================
+
 3#----------------------------------------------------------------
 4#----------------------------------------------------------------
 5#----------------------------------------------------------------
