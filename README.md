@@ -1,6 +1,7 @@
 # lab_Application_v1
 
 1#MVC---------------------------------------------------------------
+1#MVC---------------------------------------------------------------
 ========1.binding=============================
 
 //1.1 เรียกใช้  binding
@@ -11,7 +12,7 @@
 
 //2.1 สร้าง package รูปแบบ MVC
 
--acyivity -manager -util -view -fragment
+-activity -manager -util -view -fragment
 
 //2.2 สร้าง MainApplication 
 
@@ -31,15 +32,23 @@
 
 ========4.copy template=======================
 
--singleton-fragment-customview-customviewgroup
+//4.1 ก๊อปปี้ template จาก libarry
 
-========5.create fragment_main=
+-singleton -fragment -customview -customviewgroup
 
-create fragment_main.xml --> layout
+========5.create fragment_main===============
 
-create MainFragment.class --> fragment
+//5.1 สร้าง fragment เพื่อใช้ แทน activity_main
+
+create fragment_main.xml --> layout  xml
+
+//5.2 ก๊อปปี้ template fragmentTemplat เปลี่ยนชื่อเป็น MainFragment
+
+create MainFragment.class --> fragment java
 
 ========6.add mainfragment to mainactivity ====
+
+// add fragment เข้าไปที่ activity
 
 -MainActivity
 
@@ -56,30 +65,45 @@ create MainFragment.class --> fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+
 2#MENU------------------------------------------------------------
 
 ========1.change color=========
 
+//1. เปลี่ยนสี ที่  values-->color 
+
 ========2.menu=================
+
+//2.1 สร้างเมนู ที่ activity_main.xml
 
 activity_main
 
-    2.1 add menu
+    //2.1 add menu
     
-	<android.support.v4.widget.DrawerLayout
-  
-  	#####################################################
-    
+	 <android.support.v4.widget.DrawerLayout   //ครอบทั้งหมด
+	 
+  	#######################################################
+	
+      //เรียกใช้ menu
+      
 	<LinearLayout
             android:background="?attr/colorAccent"
             android:layout_gravity="start"
-            android:layout_width="@dimen/drawer_menu_width" // --> values = 240dp    values-w360dp = 320dp
+            android:layout_width="@dimen/drawer_menu_width" //ขนาดของเมนูเปลี่ยนเป็น ID
             android:layout_height="match_parent">
         </LinearLayout>
-        
-       #########################################################
-       
+    
+    #########################################################
+    
+    //2.2 ทำให้เครื่องขนาดเล็กใช้ได้
+    
+    // create values-w360dp  = <dimen name="drawer_menu_width">320dp</dimen>
+    
+                      values = <dimen name="drawer_menu_width">240dp</dimen>
+		      
+=======3.Hamburger icon=====================
 3#----------------------------------------------------------------
 4#----------------------------------------------------------------
 5#----------------------------------------------------------------
 6#----------------------------------------------------------------
+
