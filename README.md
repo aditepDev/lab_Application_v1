@@ -3,7 +3,7 @@
 # 1.MVC
 * 1.binding
 
-//1.1 เรียกใช้  binding
+** 1.1 เรียกใช้  binding
 ```
 -" dataBinding{enabled true} " --> app/gradle
 ```
@@ -47,7 +47,7 @@ create MainFragment.class --> fragment java
 ```
 * 6.add mainfragment to mainactivity 
 
-// add fragment เข้าไปที่ activity
+** 6.1 add fragment เข้าไปที่ activity
 
 -MainActivity
 ```
