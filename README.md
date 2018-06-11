@@ -1,5 +1,3 @@
-# lab_Application_v1
-
 # 1.MVC
 ## 1.binding
 
@@ -78,31 +76,29 @@ create MainFragment.class --> fragment java
 * 2.1 สร้างเมนู ที่ activity_main.xml
 
 activity_main
-
-    * 2.1 add menu
-    
+ * 2.1 add menu
+    ```
 	 <android.support.v4.widget.DrawerLayout   //ครอบทั้งหมด
-	
-  	#######################################################
+	```
 	
       //เรียกใช้ menu
-      
+      ```
 	<LinearLayout
             android:background="?attr/colorAccent"
             android:layout_gravity="start"
             android:layout_width="@dimen/drawer_menu_width" //ขนาดของเมนูเปลี่ยนเป็น ID
             android:layout_height="match_parent">
         </LinearLayout>
+    ```
     
-    #########################################################
-    
-    //2.2 ทำให้เครื่องขนาดเล็กใช้ได้
-    
-    // create values-w360dp  = <dimen name="drawer_menu_width">320dp</dimen>
+    * 2.2 ทำให้เครื่องขนาดเล็กใช้ได้
+    ```
+   create values-w360dp  = <dimen name="drawer_menu_width">320dp</dimen>
     
                       values = <dimen name="drawer_menu_width">240dp</dimen>
+   ```
 		      
-* 3.Hamburger icon
+## 3.Hamburger icon
 
 3#----------------------------------------------------------------
 4#----------------------------------------------------------------
