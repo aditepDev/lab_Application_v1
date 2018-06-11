@@ -33,19 +33,25 @@
 * 1.3.1 เรียกใช้ liberry
 #### settings.gradle
 ```
--" ,':TheCheeseLibrary'  "
+ ,':TheCheeseLibrary'  
+ 
 ```
    * 1.3.1.1  add library เข้า ไปใน app
    #### app/gradle
+   
    ```
+   
    implementation project(':TheCheeseLibrary')
+   
    ```
 
 * 1.3.2 ใช้ Contextor ที่  MainApplication
 
 #### MainApplication.java 
 ```
+
  -MainApp,onCreate --> { Contextor.getInstance().init(getApplicationContext()); }
+ 
 ```
 
 ## 1.4.copy template
@@ -53,21 +59,26 @@
 * 1.4.1 ก๊อปปี้ template จาก libarry
 
 ```
--singleton -fragment -customview -customviewgroup
+- singletontemplate 
+- fragmenttemplate
+- customviewtemplate
+- customviewgrouptemplate
+
 ```
 
 ## 1.5.create fragment_main
 #### res/layout
 * 1.5.1 สร้าง fragment เพื่อใช้ แทน activity_main
-
 ```
-create fragment_main.xml --> layout  xml
+create fragment_main.xml 
+
 ```
 #### fragment
 * 5.2 ก๊อปปี้ template fragmentTemplat เปลี่ยนชื่อเป็น MainFragment
 
 ```
-create MainFragment.class --> fragment java
+create MainFragment.java
+
 ```
 
 ## 1.6.add mainfragment to mainactivity 
@@ -98,8 +109,6 @@ create MainFragment.class --> fragment java
 # 2.MENU
 
 ## 2.1.change color 
-
-#### values/color
 
 * 2.1.1. เปลี่ยนสี 
 #### values/color
