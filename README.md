@@ -2,15 +2,18 @@
 ## 1.binding
 
 * 1.1 เรียกใช้  binding
+ 	* app/gradle
 ```
--" dataBinding{enabled true} " --> app/gradle
+ dataBinding{enabled true}
 ```
 ## 2.mvc
 
 * 2.1 สร้าง package รูปแบบ MVC
+
 ```
 -activity -manager -util -view -fragment
 ```
+
 * 2.2 สร้าง MainApplication 
 ```
 -create MainApplication.class
