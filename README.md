@@ -135,13 +135,13 @@ create MainFragment.class --> fragment java
 	```
 	ActionBarDrawerToggle actionBarDrawerToggle;
 	```
-## values/string
+### -- values/string
 * 3.2.3  ประกาศตัวแปรที่ values/string
 	```
 	  <string name="open_drawer">Open Menu</string>
 	  <string name="close_drawer">Close Menu</string>
 	```
-	
+## MainActivity.java	
 * 3.3.4 new ActionBarDrawerToggle
 	```
 	    actionBarDrawerToggle = new ActionBarDrawerToggle(
