@@ -3,11 +3,7 @@
 
 * 1.1 เรียกใช้  binding
 
-<<<<<<< HEAD
 - app/gradle
-=======
--app/gradle
->>>>>>> 06ec68e737da7054f92409269aed99c12f449dd7
 ```
  dataBinding{enabled true}
 ```
@@ -125,7 +121,6 @@ create MainFragment.class --> fragment java
    ```
 		      
 ## 3.Hamburger icon
-<<<<<<< HEAD
 	
 * 3.1 ประกาศ ID ให้ drawerLayout
 
@@ -186,9 +181,10 @@ create MainFragment.class --> fragment java
     }
 	```
 	 * 3.9 ทำให้ button menu กดได้ 
+	
 	 ```
-@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+	@Override
+  	  public boolean onOptionsItemSelected(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item))
         return true;
         return super.onOptionsItemSelected(item);
@@ -196,8 +192,6 @@ create MainFragment.class --> fragment java
 	```
 	 
 	 
-=======
->>>>>>> 06ec68e737da7054f92409269aed99c12f449dd7
 
 3#----------------------------------------------------------------
 4#----------------------------------------------------------------
