@@ -85,23 +85,23 @@ create MainFragment.class --> fragment java
 ```
 # 2.MENU
 
-## 1.change color
+## 1.change color values/color
 
-* 1. เปลี่ยนสี ที่  ``` values/color ```
+* 2.1.1. เปลี่ยนสี ที่  ``` values/color ```
 
 ## 2.menu
 
-* 2.1 สร้างเมนู ที่ activity_main.xml
+* 2.2.1 สร้างเมนู ที่ activity_main.xml
 
 /activity_main.xml
 
- * 2.1 add menu
+ * 2.2.3 add menu
  
     ```
 	 <android.support.v4.widget.DrawerLayout   //ครอบทั้งหมด
 	```
 	
-  * 2.2 เรียกใช้ menu
+  * 2.2.4 เรียกใช้ menu
       
       ```
 	<LinearLayout
@@ -112,7 +112,7 @@ create MainFragment.class --> fragment java
         </LinearLayout>
     ```
     
- * 2.3 ทำให้เครื่องขนาดเล็กใช้ได้
+ * 2.2.5 ทำให้เครื่องขนาดเล็กใช้ได้
  
     ```
    create values-w360dp  = <dimen name="drawer_menu_width">320dp</dimen>
