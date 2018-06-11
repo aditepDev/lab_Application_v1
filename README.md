@@ -121,21 +121,24 @@ create MainFragment.class --> fragment java
    ```
 		      
 # 3.Hamburger icon
-## 3.1. activity_main.xml
+
+### 3.1. ประกาศ ID
+#### activity_main.xml
 * 3.1.1 ประกาศ ID ให้ drawerLayout
 
 	```
 	 android:id="@+id/drawerLayout"
 	```
-## 3.2. MainActivity.java
+## 3.2. add Hamburger
+#### MainActivity.java	
 * 3.2.1 สร้าง method initInstances(); 
 	
-* 2.2 ประกาศตัวแปร  ActionBarDrawerToggle;
+* 3.2.2 ประกาศตัวแปร  ActionBarDrawerToggle;
 	
 	```
 	ActionBarDrawerToggle actionBarDrawerToggle;
 	```
-### -- values/string.xml
+####  values/string.xml
 * 3.2.3  ประกาศตัวแปรที่ values/string
 	```
 	  <string name="open_drawer">Open Menu</string>
