@@ -8,7 +8,7 @@
  dataBinding{enabled true}
 ```
 
-## 2.mvc
+## 1.2.mvc
 
 * 2.1 สร้าง package รูปแบบ MVC
 
@@ -16,12 +16,16 @@
 -activity -manager -util -view -fragment
 ```
 
-* 2.2 สร้าง MainApplication 
+* 1.2.2 สร้าง MainApplication.java 
 
 ```
--create MainApplication.class
+-create MainApplication.java
+```
+* 1.2.3 add MainApplication
+#### androidmanifest.xml
 
--add  android:name=".MainApplication"  --> androidmanifest
+```
+ android:name=".MainApplication"
 ```
 
 ## 3.liberry
