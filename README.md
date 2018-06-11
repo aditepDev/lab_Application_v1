@@ -6,7 +6,7 @@
 
 //1.1 เรียกใช้  binding
 
--" dataBinding{enabled true} " --> gledle
+-" dataBinding{enabled true} " --> app/gradle
 
 ========2.mvc=================================
 
