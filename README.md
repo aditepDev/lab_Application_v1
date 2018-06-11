@@ -1,13 +1,13 @@
 # lab_Application_v1
 
-## 1.MVC
-# 1.binding
+# 1.MVC
+## 1.binding
 
 * 1.1 เรียกใช้  binding
 ```
 -" dataBinding{enabled true} " --> app/gradle
 ```
-# 2.mvc
+## 2.mvc
 
 * 2.1 สร้าง package รูปแบบ MVC
 ```
@@ -19,7 +19,7 @@
 
 -add android:name=".MainApplication"  --> androidmanifest
 ```
-# 3.liberry
+## 3.liberry
 
 * 3.1 เรียกใช้ liberry
 ```
@@ -29,13 +29,13 @@
 ```
  -MainApp,onCreate --> { Contextor.getInstance().init(getApplicationContext()); }
 ```
-# 4.copy template
+## 4.copy template
 
 * 4.1 ก๊อปปี้ template จาก libarry
 ```
 -singleton -fragment -customview -customviewgroup
 ```
-# 5.create fragment_main
+## 5.create fragment_main
 
 * 5.1 สร้าง fragment เพื่อใช้ แทน activity_main
 ```
@@ -45,7 +45,7 @@ create fragment_main.xml --> layout  xml
 ```
 create MainFragment.class --> fragment java
 ```
-# 6.add mainfragment to mainactivity 
+## 6.add mainfragment to mainactivity 
 
 * 6.1 add fragment เข้าไปที่ activity
 
@@ -67,13 +67,13 @@ create MainFragment.class --> fragment java
             android:layout_height="match_parent"/>
 
 ```
-## 2.MENU
+# 2.MENU
 
-# 1.change color
+## 1.change color
 
 * 1. เปลี่ยนสี ที่  values-->color 
 
-# 2.menu
+## 2.menu
 
 * 2.1 สร้างเมนู ที่ activity_main.xml
 
