@@ -3,7 +3,7 @@
 
 * 1.1 เรียกใช้  binding
 
-- app/gradle
+-app/gradle
 ```
  dataBinding{enabled true}
 ```
