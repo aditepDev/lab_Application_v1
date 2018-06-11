@@ -27,7 +27,7 @@
 
 //3.2 ใช้ Contextor ที่  MainApplication
 
-- MainApp,onCreate --> { Contextor.getInstance().init(getApplicationContext()); }
+ -MainApp,onCreate --> { Contextor.getInstance().init(getApplicationContext()); }
 
 * 4.copy template
 
