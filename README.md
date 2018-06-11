@@ -91,7 +91,7 @@ activity_main
         </LinearLayout>
     ```
     
-    * 2.2 ทำให้เครื่องขนาดเล็กใช้ได้
+ * 2.2 ทำให้เครื่องขนาดเล็กใช้ได้
     ```
    create values-w360dp  = <dimen name="drawer_menu_width">320dp</dimen>
     
