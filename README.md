@@ -120,28 +120,29 @@ create MainFragment.class --> fragment java
                   values = <dimen name="drawer_menu_width">240dp</dimen>
    ```
 		      
-## 3.Hamburger icon
-	
-* 3.1 ประกาศ ID ให้ drawerLayout
+# 3.Hamburger icon
+## 3.1. activity_main.xml
+* 3.1.1 ประกาศ ID ให้ drawerLayout
 
 	```
 	 android:id="@+id/drawerLayout"
 	```
-	/MainActivity.java
-	*  3.2 สร้าง method initInstances(); 
+## 3.2. MainActivity.java
+* 3.2.1 สร้าง method initInstances(); 
 	
-	* 3.3 ประกาศตัวแปร  ActionBarDrawerToggle;
+* 2.2 ประกาศตัวแปร  ActionBarDrawerToggle;
 	
 	```
 	ActionBarDrawerToggle actionBarDrawerToggle;
 	```
-	3.4  ประกาศตัวแปรที่ values/string
+## values/string
+* 3.2.3  ประกาศตัวแปรที่ values/string
 	```
 	  <string name="open_drawer">Open Menu</string>
 	  <string name="close_drawer">Close Menu</string>
 	```
 	
-	* 3.5 new ActionBarDrawerToggle
+* 3.3.4 new ActionBarDrawerToggle
 	```
 	    actionBarDrawerToggle = new ActionBarDrawerToggle(
                 MainActivity.this,
@@ -151,13 +152,13 @@ create MainFragment.class --> fragment java
 		
 	```
 	
-	* 3.6 addDrawerListener
+* 3.3.5 addDrawerListener
 	
 	```
 	 binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
 	```
 	
-	* 3.6  setHomeButtonEnable 
+* 3.3.6  setHomeButtonEnable 
 	
 	```
 		getSupportActionBar().setHomeButtonEnabled(true);
@@ -165,14 +166,14 @@ create MainFragment.class --> fragment java
 		
 	```
 	
-	*  3.7 เข้าถึง ActionBar 
+*  3.3.7 เข้าถึง ActionBar 
 	```
 	 @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState(); }
 	```
-	*  3.8 เปลี่ยน icon menu
+*  3.3.8 เปลี่ยน icon menu
 	```
 	 @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -180,7 +181,7 @@ create MainFragment.class --> fragment java
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 	```
-	 * 3.9 ทำให้ button menu กดได้ 
+ * 3.3.9 ทำให้ button menu กดได้ 
 	
 	 ```
 	@Override
