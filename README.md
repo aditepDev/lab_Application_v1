@@ -15,19 +15,21 @@
 
 #### /java/package
 
-
-#### activity
-#### manager
-#### util
-#### view 
-#### fragment
-
+```
+# activity
+# manager
+# util
+# view 
+# fragment
+```
 * 1.2.2 สร้าง MainApplication.java 
 
 #### java/app
 
 -create 
+```
 MainApplication.java
+```
 
 * 1.2.3 add MainApplication
 #### androidmanifest.xml
