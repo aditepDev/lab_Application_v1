@@ -29,7 +29,7 @@
 * 3.1 เรียกใช้ liberry
 
 ```
--" ,':TheCheeseLibrary'  " ->  add library
+-" ,':TheCheeseLibrary'  " -->  add library
 ```
 
 * 3.2 ใช้ Contextor ที่  MainApplication
@@ -127,7 +127,7 @@ create MainFragment.class --> fragment java
 	```
 	 android:id="@+id/drawerLayout"
 	```
-	
+	/MainActivity.java
 	*  3.2 สร้าง method initInstances(); 
 	
 	* 3.3 ประกาศตัวแปร  ActionBarDrawerToggle;
