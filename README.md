@@ -241,7 +241,46 @@ create
 	 
 	 
 
-3#----------------------------------------------------------------
+# 4. ToolBar
+## 4.1.ซ้อน actionbar
+#### values/styles
+
+ ```
+ <style name="AppTheme" parent="Theme.AppCompat.Light">
+	
+ ```
+ 
+## 4.2 แปะ toolbar เข้าไป layout
+  * 4.2.1 ครอบ FrameLayout ด้วย LinearLayout และใช้ Toolbar แล้วประกาศ ID
+  #### activity_main.xml
+  ```
+   <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.Toolbar
+	    	android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"/>
+           		 <FrameLayout
+             		   android:id="@+id/contentContainer"
+              		   android:layout_width="match_parent"
+                           android:layout_height="match_parent" />
+   </LinearLayout>
+``` 
+
+ 4.2.2 ประกาศ ID toolbar 
+  #### MainActivity.java
+  ```
+ Toolbar toolbar;
+  ```
+  4.2.3 บอก actionbarว่าจะ ใช้ toolbar แทน
+  #### MainActivity.java/initInstances()
+  ```
+  setSupportActionBar(binding.toolbar);
+   ```
+## 4.2 ใช้ toolbar แทน actionbar
+
 4#----------------------------------------------------------------
 5#----------------------------------------------------------------
 6#----------------------------------------------------------------
