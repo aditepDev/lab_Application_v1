@@ -274,7 +274,7 @@ create
                 android:layout_height="match_parent" />
         </LinearLayout>
 ``` 
-  4.2.2 บอก actionbarว่าจะ ใช้ toolbar แทน
+ * 4.2.2 บอก actionbarว่าจะ ใช้ toolbar แทน
   #### MainActivity.java/initInstances()
   ```
   setSupportActionBar(binding.toolbar);
