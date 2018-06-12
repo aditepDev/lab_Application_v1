@@ -251,25 +251,28 @@ create
  ```
  
 ## 4.2 แปะ toolbar เข้าไป layout
-  * 4.2.1 ครอบ FrameLayout ด้วย LinearLayout และใช้ Toolbar แล้วประกาศ ID แล้วใส่ background
+  * 4.2.1 ครอบ FrameLayout ด้วย LinearLayout  
+  	* และใช้ Toolbar แล้วประกาศ ID แล้วใส่ background และเปลี่ยน theme แล้ว popuptheme
   #### activity_main.xml
   ```
-   <LinearLayout
+  <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-	    
+
             <android.support.v7.widget.Toolbar
-	    	android:id="@+id/toolbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-		android:background="?attr/colorPrimary"
-                android:layout_height="?attr/actionBarSize"/>
-		
-           		 <FrameLayout
-             		   android:id="@+id/contentContainer"
-              		   android:layout_width="match_parent"
-                           android:layout_height="match_parent" />
-   </LinearLayout>
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+		android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+            <FrameLayout
+                android:id="@+id/contentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 ``` 
   4.2.2 บอก actionbarว่าจะ ใช้ toolbar แทน
   #### MainActivity.java/initInstances()
