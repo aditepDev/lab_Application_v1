@@ -30,13 +30,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initInstances() {
-
+        setSupportActionBar(binding.toolbar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(
                 MainActivity.this,
                 binding.drawerLayout,R.string.open_drawer,R.string.close_drawer
         );
         binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
-
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
