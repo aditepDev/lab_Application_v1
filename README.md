@@ -274,14 +274,95 @@ create
                 android:layout_height="match_parent" />
         </LinearLayout>
 ``` 
-  4.2.2 บอก actionbarว่าจะ ใช้ toolbar แทน
+ * 4.2.2 บอก actionbarว่าจะ ใช้ toolbar แทน
   #### MainActivity.java/initInstances()
   ```
   setSupportActionBar(binding.toolbar);
    ```
-## 4.2 ใช้ toolbar แทน actionbar
 
-4#----------------------------------------------------------------
-5#----------------------------------------------------------------
+# 5.สร้าง layout เพื่อใช้เป็น CustomViewGroup 
+ #### layout
+ 
+ list_item_photo.xml
+ 
+
+ 
+ * 5.1 ใช้ CustomViewGroupTemplate ทำเป็น  PhotoListItem
+  #### java/view/PhotoListItem.java 	
+  * 5.1.1 ทำให้ CustomViewGroup มีขนาด 2/3
+ ```
+  @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = width * 2 / 3;
+        int newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
+                height,
+                MeasureSpec.EXACTLY
+        );
+        // Child Views
+        super.onMeasure(widthMeasureSpec, newHeightMeasureSpec);
+        // Self
+        setMeasuredDimension(width,height);
+    }
+ ```
+ 
+ 
+ 	
+# 6.ListView	
+ * 6.1 แปะ listview ไปที่  fragment_main
+#### fragment_main.xml
+ ``` 
+      <ListView
+           android:id="@+id/listView"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+       </ListView>
+ ```
+ * 6.2 สร้าง package adapter เพื่อส่ง view ให้ listview
+ 	* 6.2.1สร้าง PhotoListAdapter.java และ  extends BaseAdapter
+	
+```
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        PhotoListItem item;
+        if ( convertView != null)
+                item = (PhotoListItem) convertView;
+        else
+            item = new PhotoListItem(parent.getContext());
+        return  item;
+    }
+```
+   * ถ้ามี view มากว่า 1 ประเภทใน listview
+```
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position % 2 == 0 ? 0 : 1;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (getItemViewType(position) == 0) {
+            PhotoListItem item;
+            if (convertView != null)
+                item = (PhotoListItem) convertView;
+            else
+                item = new PhotoListItem(parent.getContext());
+            return item;
+        } else {
+            TextView item;
+            if (convertView != null)
+                item = (TextView) convertView;
+            else
+                item = new TextView(parent.getContext());
+            item.setText("Position: " + position);
+            return item;
+        }
+	```
 6#----------------------------------------------------------------
 
