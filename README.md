@@ -308,6 +308,30 @@ create
  
  
  	
-5#----------------------------------------------------------------
+# 6.ListView	
+ * 6.1 แปะ listview ไปที่  fragment_main
+#### fragment_main.xml
+ ``` 
+      <ListView
+           android:id="@+id/listView"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+       </ListView>
+ ```
+ * 6.2 สร้าง package adapter เพื่อส่ง view ให้ listview
+ 	* 6.2.1สร้าง PhotoListAdapter.java และ  extends BaseAdapter
+	
+```
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        PhotoListItem item;
+        if ( convertView != null)
+                item = (PhotoListItem) convertView;
+        else
+            item = new PhotoListItem(parent.getContext());
+        return  item;
+    }
+    ```
 6#----------------------------------------------------------------
 
