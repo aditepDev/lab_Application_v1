@@ -279,9 +279,35 @@ create
   ```
   setSupportActionBar(binding.toolbar);
    ```
-## 4.2 ใช้ toolbar แทน actionbar
 
-4#----------------------------------------------------------------
+# 5.สร้าง layout เพื่อใช้เป็น CustomViewGroup 
+ #### layout
+ 
+ list_item_photo.xml
+ 
+
+ 
+ * 5.1 ใช้ CustomViewGroupTemplate ทำเป็น  PhotoListItem
+  #### java/view/PhotoListItem.java 	
+  * 5.1.1 ทำให้ CustomViewGroup มีขนาด 2/3
+ ```
+  @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = width * 2 / 3;
+        int newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
+                height,
+                MeasureSpec.EXACTLY
+        );
+        // Child Views
+        super.onMeasure(widthMeasureSpec, newHeightMeasureSpec);
+        // Self
+        setMeasuredDimension(width,height);
+    }
+ ```
+ 
+ 
+ 	
 5#----------------------------------------------------------------
 6#----------------------------------------------------------------
 
