@@ -439,8 +439,11 @@ public interface ApiService {
   	* 7.5.1 สร้าง PhotoItemDao.java  
 	#### DAO/PhotoItemDao.java  
 	* ประกาศตัวแปรข้างใน แล้วให้ android studio generate get set ให้
-	https://nuuneoi.com/courses/500px/list
-	Ex. ตัวอย่าง DAO  
+	
+https://nuuneoi.com/courses/500px/list
+	
+Ex. ตัวอย่าง DAO  
+
 ```
     @SerializedName("id")        private  int id;
     @SerializedName("link")      private String link;
@@ -461,7 +464,9 @@ public interface ApiService {
 ```
 * 7.5.2 สร้าง PhotoItemCollectionDao.java
 #### DAO/PhotoItemCollectionDao.java  
-* ประกาศตัวแปรข้างนอก แล้วให้ android studio generate get set ให้
+* ประกาศตัวแปรข้างนอก แล้วให้ android studio generate get set ให้ 
+* ใส่ PhotoItemDao ใน List<PhotoItemDao> data
+	
 ```
 public class PhotoItemCollectionDao {
     @SerializedName("success") private boolean success;
