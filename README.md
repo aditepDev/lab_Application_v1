@@ -415,12 +415,12 @@ public interface ApiService {
         return service;
     }
  ```
- ## 7.4 ติดตั้ง  constraint
+ ## 7.4 ติดตั้ง  Converter
  #### app/gradle
  ```
   implementation 'com.android.support.constraint:constraint-layout:1.1.1'
   ```
-   * ใส่ constraint ให้ retrofit
+   * ใส่ Converter ให้ retrofit
    
    #### manager/HttpManager.java
     
