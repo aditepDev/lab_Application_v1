@@ -363,6 +363,25 @@ create
             item.setText("Position: " + position);
             return item;
         }
-	```
-6#----------------------------------------------------------------
+```
+	
+* 6.3 new PhotoListAdapter ที่ MianFragment และ set Adapter ให้ list view
+#### fragment/MainFragment.java
+```
+  listAdapter = new PhotoListAdapter();
+   binding.listView.setAdapter(listAdapter);
+```
+   * 6.3.1 onCreateView สำหรับ binding
+```
+ @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_main, container, false);
+        View rootView = binding.getRoot();
+        initInstances(rootView);
+        return rootView;
+    }
+  ```
+# 7.  DAO
 
