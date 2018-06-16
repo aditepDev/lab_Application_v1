@@ -309,7 +309,7 @@ create
  
  	
 # 6.ListView	
- * 6.1 แปะ listview ไปที่  fragment_main
+ ## 6.1 แปะ listview ไปที่  fragment_main
 #### fragment_main.xml
  ``` 
       <ListView
@@ -319,7 +319,7 @@ create
 
        </ListView>
  ```
- * 6.2 สร้าง package adapter เพื่อส่ง view ให้ listview
+ ## 6.2 สร้าง package adapter เพื่อส่ง view ให้ listview
  	* 6.2.1สร้าง PhotoListAdapter.java และ  extends BaseAdapter
 	
 ```
@@ -365,7 +365,7 @@ create
         }
 ```
 	
-* 6.3 new PhotoListAdapter ที่ MianFragment และ set Adapter ให้ list view
+## 6.3 new PhotoListAdapter ที่ MianFragment และ set Adapter ให้ list view
 #### fragment/MainFragment.java
 ```
   listAdapter = new PhotoListAdapter();
@@ -384,4 +384,50 @@ create
     }
   ```
 # 7.  DAO
+ ## 7.1 ติดตั้ง retrofit Library
+ http://square.github.io/retrofit/
+#### app/gradle
+  ```
+ implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+  ```
+ ## 7.2 ประกาศ interface  
+#### manager/http/ApiService.java 
+https://nuuneoi.com/courses/500px/list
+  ```
+public interface ApiService {
+    @POST("list")
+    Call<Object> loadPhotoList();
+}
+  ```
+  ## 7.3 สร้าง retrofit  สร้างด้วย SingletonTemplate  ตั้งชื่อว่า HttpManager
+  #### manager/HttpManager.java
+   ```
+      private ApiService service;
+    private HttpManager() {
+        mContext = Contextor.getInstance().getContext();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://nuuneoi.com/courses/500px/")
+                .build();
+        service = retrofit.create(ApiService.class);
+    }
 
+    public ApiService getService() {
+        return service;
+    }
+ ```
+ ## 7.4 ติดตั้ง  constraint
+ #### app/gradle
+ ```
+  implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+  ```
+   * ใส่ constraint ให้ retrofit
+   
+   #### manager/HttpManager.java
+    
+```
+	.baseUrl("https://nuuneoi.com/courses/500px/")
+	  
+       .addConverterFactory(GsonConverterFactory.create())
+       
+        .build();
+```
