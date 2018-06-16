@@ -384,6 +384,7 @@ create
     }
   ```
 # 7.  DAO
+#### Server = JSON -> retrofit = string ->  Converter = DAO -> DAO
  ## 7.1 ติดตั้ง retrofit Library
  http://square.github.io/retrofit/
 #### app/gradle
@@ -431,3 +432,52 @@ public interface ApiService {
        
         .build();
 ```
+## 7.5 สร้าง DAO
+ 
+   * สร้าง package dao 
+  	* ประกาศตัวแปรจากข้างในออกข้างนอก
+  	* 7.5.1 สร้าง PhotoItemDao.java  
+	#### DAO/PhotoItemDao.java  
+	* ประกาศตัวแปรข้างใน แล้วให้ android studio generate get set ให้
+	https://nuuneoi.com/courses/500px/list
+	Ex. ตัวอย่าง DAO  
+```
+    @SerializedName("id")        private  int id;
+    @SerializedName("link")      private String link;
+    @SerializedName("image_url") private String imageUrl;
+    .
+    .
+    n
+    
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getLink() { return link; }
+    public void setLink(String link) { this.link = link; }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }  
+    .
+    .
+    n
+```
+* 7.5.2 สร้าง PhotoItemCollectionDao.java
+#### DAO/PhotoItemCollectionDao.java  
+* ประกาศตัวแปรข้างนอก แล้วให้ android studio generate get set ให้
+```
+public class PhotoItemCollectionDao {
+    @SerializedName("success") private boolean success;
+    @SerializedName("data") private List<PhotoItemDao> data;  
+
+    public boolean isSuccess() { return success; }
+    public void setSuccess(boolean success) { this.success = success; }
+    public List<PhotoItemDao> getData() {return data; }
+    public void setData(List<PhotoItemDao> data) { this.data = data; }
+}
+```
+ * 7.5.3 PhotoItemCollectionDao แปะที่ ApiService
+ #### manager/http/ApiService.java 
+ ```
+public interface ApiService {
+    @POST("list")
+    Call<PhotoItemCollectionDao> loadPhotoList();
+}
+  ```
