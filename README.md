@@ -418,7 +418,7 @@ public interface ApiService {
  ## 7.4 ติดตั้ง  Converter
  #### app/gradle
  ```
-  implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+  implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
   ```
    * ใส่ Converter ให้ retrofit
    
