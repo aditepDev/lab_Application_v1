@@ -309,7 +309,7 @@ create
  
  	
 # 6.ListView	
- * 6.1 แปะ listview ไปที่  fragment_main
+ ## 6.1 แปะ listview ไปที่  fragment_main
 #### fragment_main.xml
  ``` 
       <ListView
@@ -319,7 +319,7 @@ create
 
        </ListView>
  ```
- * 6.2 สร้าง package adapter เพื่อส่ง view ให้ listview
+ ## 6.2 สร้าง package adapter เพื่อส่ง view ให้ listview
  	* 6.2.1สร้าง PhotoListAdapter.java และ  extends BaseAdapter
 	
 ```
@@ -363,6 +363,126 @@ create
             item.setText("Position: " + position);
             return item;
         }
-	```
-6#----------------------------------------------------------------
+```
+	
+## 6.3 new PhotoListAdapter ที่ MianFragment และ set Adapter ให้ list view
+#### fragment/MainFragment.java
+```
+  listAdapter = new PhotoListAdapter();
+   binding.listView.setAdapter(listAdapter);
+```
+   * 6.3.1 onCreateView สำหรับ binding
+```
+ @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_main, container, false);
+        View rootView = binding.getRoot();
+        initInstances(rootView);
+        return rootView;
+    }
+  ```
+# 7.  DAO
+#### Server = JSON -> retrofit = string ->  Converter = DAO -> DAO
+ ## 7.1 ติดตั้ง retrofit Library
+ http://square.github.io/retrofit/
+#### app/gradle
+  ```
+ implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+  ```
+ ## 7.2 ประกาศ interface  
+#### manager/http/ApiService.java 
+https://nuuneoi.com/courses/500px/list
+  ```
+public interface ApiService {
+    @POST("list")
+    Call<Object> loadPhotoList();
+}
+  ```
+  ## 7.3 สร้าง retrofit  สร้างด้วย SingletonTemplate  ตั้งชื่อว่า HttpManager
+  #### manager/HttpManager.java
+   ```
+      private ApiService service;
+    private HttpManager() {
+        mContext = Contextor.getInstance().getContext();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://nuuneoi.com/courses/500px/")
+                .build();
+        service = retrofit.create(ApiService.class);
+    }
 
+    public ApiService getService() {
+        return service;
+    }
+ ```
+ ## 7.4 ติดตั้ง  Converter
+ #### app/gradle
+ ```
+  implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+  ```
+   * ใส่ Converter ให้ retrofit
+   
+   #### manager/HttpManager.java
+    
+```
+	.baseUrl("https://nuuneoi.com/courses/500px/")
+	  
+       .addConverterFactory(GsonConverterFactory.create())
+       
+        .build();
+```
+## 7.5 สร้าง DAO
+ 
+   * สร้าง package dao 
+  	* ประกาศตัวแปรจากข้างในออกข้างนอก
+  	* 7.5.1 สร้าง PhotoItemDao.java  
+	#### DAO/PhotoItemDao.java  
+	* ประกาศตัวแปรข้างใน แล้วให้ android studio generate get set ให้
+	
+https://nuuneoi.com/courses/500px/list
+	
+Ex. ตัวอย่าง DAO  
+
+```
+    @SerializedName("id")        private  int id;
+    @SerializedName("link")      private String link;
+    @SerializedName("image_url") private String imageUrl;
+    .
+    .
+    n
+    
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getLink() { return link; }
+    public void setLink(String link) { this.link = link; }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }  
+    .
+    .
+    n
+```
+* 7.5.2 สร้าง PhotoItemCollectionDao.java
+#### DAO/PhotoItemCollectionDao.java  
+* ประกาศตัวแปรข้างนอก แล้วให้ android studio generate get set ให้ 
+* ใส่ PhotoItemDao ใน List<PhotoItemDao> data
+	
+```
+public class PhotoItemCollectionDao {
+    @SerializedName("success") private boolean success;
+    @SerializedName("data") private List<PhotoItemDao> data;  
+
+    public boolean isSuccess() { return success; }
+    public void setSuccess(boolean success) { this.success = success; }
+    public List<PhotoItemDao> getData() {return data; }
+    public void setData(List<PhotoItemDao> data) { this.data = data; }
+}
+```
+ * 7.5.3 PhotoItemCollectionDao แปะที่ ApiService
+ #### manager/http/ApiService.java 
+ ```
+public interface ApiService {
+    @POST("list")
+    Call<PhotoItemCollectionDao> loadPhotoList();
+}
+  ```
