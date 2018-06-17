@@ -2,20 +2,37 @@ package com.aditep.lab_android_v1.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.aditep.lab_android_v1.R;
+import com.aditep.lab_android_v1.dao.PhotoItemCollectionDao;
+import com.aditep.lab_android_v1.dao.PhotoItemDao;
+import com.aditep.lab_android_v1.manager.PhotoListManager;
 import com.aditep.lab_android_v1.view.PhotoListItem;
 
 public class PhotoListAdapter extends BaseAdapter {
-    @Override
+
+    PhotoItemCollectionDao dao;
+    int lastPosition = -1;
+
+    public void setDao(PhotoItemCollectionDao dao) {
+        this.dao = dao;
+    }
+
     public int getCount() {
-        return 10000;
+        if (dao == null)
+            return 0;
+        if (dao == null)
+            return 0;
+        return dao.getData().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return dao.getData().get(position);
     }
 
     @Override
@@ -32,7 +49,18 @@ public class PhotoListAdapter extends BaseAdapter {
             item = (PhotoListItem) convertView;
         else
             item = new PhotoListItem(parent.getContext());
-        return item;
 
+        PhotoItemDao dao = (PhotoItemDao) getItem(position);
+        item.setNameText(dao.getCaption());
+        item.setDescripionText(dao.getUsername() + "\n" + dao.getCamera());
+        item.setImageUrl(dao.getImageUrl());
+
+        if (position > lastPosition) {
+            Animation anim = AnimationUtils.loadAnimation(parent.getContext(), R.anim.up_from_bottom);
+            item.startAnimation(anim);
+
+            lastPosition = position;
+        }
+        return item;
     }
 }

@@ -1,5 +1,6 @@
 package com.aditep.lab_android_v1.dao;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -8,27 +9,57 @@ import java.util.List;
 
 public class PhotoItemDao {
 
-    @SerializedName("id")   private  int id;
-    @SerializedName("link") private String link;
-    @SerializedName("image_url") private String imageUrl;
-    @SerializedName("caption")  private String caption;
-    @SerializedName("user_id") private  int userId;
-    @SerializedName("username") private String username;
-    @SerializedName("profile_prcture")  private  String profilePrcture;
-    @SerializedName("tags") private List<String> tags = new ArrayList<>();
-    @SerializedName("created_time") private Date createdTime;
-    @SerializedName("camera") private String camera;
-    @SerializedName("lens") private String lens ;
-    @SerializedName("focal_length") private String focalLength;
-    @SerializedName("iso") private String iso;
-    @SerializedName("shutter_speed") private String shutterSpeed;
-    @SerializedName("aperture") private String aperture;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("link")
+    @Expose
+    private String link;
+    @SerializedName("image_url")
+    @Expose
+    private String imageUrl;
+    @SerializedName("caption")
+    @Expose
+    private String caption;
+    @SerializedName("user_id")
+    @Expose
+    private Integer userId;
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("profile_picture")
+    @Expose
+    private String profilePicture;
+    @SerializedName("tags")
+    @Expose
+    private List<String> tags = null;
+    @SerializedName("created_time")
+    @Expose
+    private String createdTime;
+    @SerializedName("camera")
+    @Expose
+    private String camera;
+    @SerializedName("lens")
+    @Expose
+    private String lens;
+    @SerializedName("focal_length")
+    @Expose
+    private String focalLength;
+    @SerializedName("iso")
+    @Expose
+    private String iso;
+    @SerializedName("shutter_speed")
+    @Expose
+    private String shutterSpeed;
+    @SerializedName("aperture")
+    @Expose
+    private String aperture;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,11 +87,11 @@ public class PhotoItemDao {
         this.caption = caption;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -72,12 +103,12 @@ public class PhotoItemDao {
         this.username = username;
     }
 
-    public String getProfilePrcture() {
-        return profilePrcture;
+    public String getProfilePicture() {
+        return profilePicture;
     }
 
-    public void setProfilePrcture(String profilePrcture) {
-        this.profilePrcture = profilePrcture;
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     public List<String> getTags() {
@@ -88,11 +119,11 @@ public class PhotoItemDao {
         this.tags = tags;
     }
 
-    public Date getCreatedTime() {
+    public String getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
     }
 

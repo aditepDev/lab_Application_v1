@@ -1,5 +1,6 @@
 package com.aditep.lab_android_v1.fragment;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,13 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aditep.lab_android_v1.R;
+import com.aditep.lab_android_v1.databinding.FragmentMainBinding;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
 public class FragmentTemplate extends Fragment {
-
+    FragmentMainBinding binding;
     public FragmentTemplate() {
         super();
     }
@@ -28,7 +30,9 @@ public class FragmentTemplate extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_main, container, false);
+        View rootView = binding.getRoot();
         initInstances(rootView);
         return rootView;
     }
