@@ -288,7 +288,14 @@ create
 
  
  * 5.1 ใช้ CustomViewGroupTemplate ทำเป็น  PhotoListItem
-  #### java/view/PhotoListItem.java 	
+  #### java/view/PhotoListItem.java 
+  * binding inflater
+   ```
+    private void initInflate() {
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        binding = ListItemPhotoBinding.inflate(inflater, this, true);
+    }
+```
   * 5.1.1 ทำให้ CustomViewGroup มีขนาด 2/3
  ```
   @Override
@@ -366,7 +373,7 @@ create
 ```
 	
 ## 6.3 new PhotoListAdapter ที่ MianFragment และ set Adapter ให้ list view
-#### fragment/MainFragment.java
+#### fragment/MainFragment.java/initInstances()
 ```
   listAdapter = new PhotoListAdapter();
    binding.listView.setAdapter(listAdapter);
@@ -486,3 +493,4 @@ public interface ApiService {
     Call<PhotoItemCollectionDao> loadPhotoList();
 }
   ```
+			
