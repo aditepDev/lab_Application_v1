@@ -32,6 +32,7 @@ import retrofit2.Response;
 public class MainFragment extends Fragment {
     FragmentMainBinding binding;
     PhotoListAdapter listAdapter;
+    PhotoListManager photoListManager;
 
     public MainFragment() {
         super();
@@ -62,6 +63,7 @@ public class MainFragment extends Fragment {
     }
 
     private void initInstances(View rootView) {
+        photoListManager = new PhotoListManager();
         // Init 'View' instance(s) with rootView.findViewById here
         listAdapter = new PhotoListAdapter();
         binding.listView.setAdapter(listAdapter);
@@ -69,7 +71,7 @@ public class MainFragment extends Fragment {
         binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                reloadData();
+                refreshData();
             }
         });
         binding.listView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -80,50 +82,73 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                    binding.swipeRefreshLayout.setEnabled(firstVisibleItem == 0);
+                binding.swipeRefreshLayout.setEnabled(firstVisibleItem == 0);
             }
         });
 
-        reloadData();
+        refreshData();
+    }
+
+    private void refreshData() {
+        if (photoListManager.getCount() == 0)
+            reloadData();
+        else
+            reloadDataNewer();
+
+    }
+    class PhotoListLoadCallback implements Callback<PhotoItemCollectionDao>{
+        public  static  final int MODE_RELOAD = 1;
+        public  static  final int MODE_RELOAD_NEWER = 2;
+
+        int mode;
+
+        public PhotoListLoadCallback(int mode){
+            this.mode = mode;
+        }
+        @Override
+        public void onResponse(Call<PhotoItemCollectionDao> call, Response<PhotoItemCollectionDao> response) {
+            binding.swipeRefreshLayout.setRefreshing(false);
+            if (response.isSuccessful()) {
+                PhotoItemCollectionDao dao = response.body();
+                if (mode == MODE_RELOAD_NEWER)
+                photoListManager.insertDaoAtTopPosition(dao);
+                else
+                    photoListManager.setDao(dao);
+                listAdapter.setDao(photoListManager.getDao());
+                listAdapter.notifyDataSetChanged();
+                Toast.makeText(Contextor.getInstance().getContext(),
+                        "Load Completed",
+                        Toast.LENGTH_SHORT).show();
+
+            } else {
+                // Handle
+                try {
+                    Toast.makeText(Contextor.getInstance().getContext(),
+                            response.errorBody().string(),
+                            Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(Call<PhotoItemCollectionDao> call, Throwable t) {
+            binding.swipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(Contextor.getInstance().getContext(),
+                    t.toString(),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void reloadDataNewer() {
+        int maxId = photoListManager.getMaximumId();
+        Call<PhotoItemCollectionDao> call = HttpManager.getInstance().getService().loadPhotoListAfterId(maxId);
+        call.enqueue(new PhotoListLoadCallback(PhotoListLoadCallback.MODE_RELOAD_NEWER));
     }
 
     private void reloadData() {
         Call<PhotoItemCollectionDao> call = HttpManager.getInstance().getService().loadPhotoList();
-        call.enqueue(new Callback<PhotoItemCollectionDao>() {
-            @Override
-            public void onResponse(Call<PhotoItemCollectionDao> call,
-                                   Response<PhotoItemCollectionDao> response) {
-                binding.swipeRefreshLayout.setRefreshing(false);
-                if (response.isSuccessful()) {
-                    PhotoItemCollectionDao dao = response.body();
-                    listAdapter.setDao(dao);
-                    listAdapter.notifyDataSetChanged();
-                    Toast.makeText(Contextor.getInstance().getContext(),
-                            dao.getData().get(0).getCaption(), Toast.LENGTH_SHORT).show();
-
-                } else {
-                    // Handle
-                    try {
-                        Toast.makeText(Contextor.getInstance().getContext(),
-                                response.errorBody().string(),
-                                Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<PhotoItemCollectionDao> call,
-                                  Throwable t) {
-                // Handle
-                binding.swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(Contextor.getInstance().getContext(),
-                        t.toString(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        call.enqueue(new PhotoListLoadCallback(PhotoListLoadCallback.MODE_RELOAD));
     }
 
     @Override

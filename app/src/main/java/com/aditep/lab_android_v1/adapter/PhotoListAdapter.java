@@ -25,7 +25,7 @@ public class PhotoListAdapter extends BaseAdapter {
     public int getCount() {
         if (dao == null)
             return 0;
-        if (dao == null)
+        if (dao.getData() == null)
             return 0;
         return dao.getData().size();
     }
