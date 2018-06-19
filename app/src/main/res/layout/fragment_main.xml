@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,5 +17,16 @@
 
             </ListView>
         </android.support.v4.widget.SwipeRefreshLayout>
-    </LinearLayout>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnNewPhotos"
+            android:textColor="@android:color/white"
+            android:background="@drawable/selector_round_rect_button_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:text="New Photos" />
+    </RelativeLayout>
 </layout>
