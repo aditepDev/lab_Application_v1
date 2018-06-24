@@ -1,7 +1,11 @@
 package com.aditep.lab_android_v1.fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -11,17 +15,24 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.aditep.lab_android_v1.R;
+import com.aditep.lab_android_v1.activity.MoreInfoActivity;
 import com.aditep.lab_android_v1.adapter.PhotoListAdapter;
 import com.aditep.lab_android_v1.dao.PhotoItemCollectionDao;
+import com.aditep.lab_android_v1.dao.PhotoItemDao;
 import com.aditep.lab_android_v1.databinding.FragmentMainBinding;
+import com.aditep.lab_android_v1.datatype.MutableInteger;
 import com.aditep.lab_android_v1.manager.HttpManager;
 import com.aditep.lab_android_v1.manager.PhotoListManager;
 import com.aditep.lab_android_v1.view.PhotoListItem;
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import retrofit2.Call;
@@ -34,10 +45,14 @@ import retrofit2.Response;
  */
 public class MainFragment extends Fragment {
     //Variables
+    public interface FragmentListener {
+        void onPhotoItemClicked(PhotoItemDao dao);
+    }
 
     FragmentMainBinding binding;
     PhotoListAdapter listAdapter;
     PhotoListManager photoListManager;
+    MutableInteger lastPositionInteger;
 
     /*******************
      * Functions
@@ -54,25 +69,48 @@ public class MainFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Initialize Fragment level's variables
+        init(savedInstanceState);
+
+
+        if (savedInstanceState != null)
+            onRestoreInstanceState(savedInstanceState);
+        ; //Restore Instance State
+
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_main, container, false);
         View rootView = binding.getRoot();
-        initInstances(rootView);
+        initInstances(rootView, savedInstanceState);
         return rootView;
     }
 
-    private void initInstances(View rootView) {
+    private void init(Bundle savedInstanceState) {
         photoListManager = new PhotoListManager();
+        lastPositionInteger = new MutableInteger(-1);
+
+
+    }
+
+    private void initInstances(View rootView, Bundle savedInstanceState) {
+
         // Init 'View' instance(s) with rootView.findViewById here
         binding.btnNewPhotos.setOnClickListener(buttonClickListener);
-        listAdapter = new PhotoListAdapter();
+        listAdapter = new PhotoListAdapter(lastPositionInteger);
+        listAdapter.setDao(photoListManager.getDao());
         binding.listView.setAdapter(listAdapter);
+        binding.listView.setOnItemClickListener(listViewItemClickListener);
         binding.swipeRefreshLayout.setOnRefreshListener(pullToRefreshListener);
         binding.listView.setOnScrollListener(listViewScrollListener);
-
-        refreshData();
+        if (savedInstanceState == null)
+            refreshData();
     }
 
     private void refreshData() {
@@ -125,6 +163,16 @@ public class MainFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Save Instance State here
+        outState.putBundle("photoListManager", photoListManager.onSaveInstanceState());
+        outState.putBundle("lastPositionInteger", lastPositionInteger.onSaveInstanceState());
+
+    }
+
+    private void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Restore Instance state here
+
+        photoListManager.onRestoreInstanceState(savedInstanceState.getBundle("photoListManager"));
+        lastPositionInteger.onRestoreInstanceState(savedInstanceState.getBundle("lastPositionInteger"));
     }
 
     /*
@@ -133,9 +181,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            // Restore Instance State here
-        }
+
     }
 
     private void showButtonNewPhotos() {
@@ -198,6 +244,17 @@ public class MainFragment extends Fragment {
                         loadMoreData();
                     }
                 }
+            }
+        }
+    };
+
+    AdapterView.OnItemClickListener listViewItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (position < photoListManager.getCount()) {
+                PhotoItemDao dao = photoListManager.getDao().getData().get(position);
+                FragmentListener listener = (FragmentListener) getActivity();
+                listener.onPhotoItemClicked(dao);
             }
         }
     };

@@ -1,5 +1,6 @@
 package com.aditep.lab_android_v1.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -9,12 +10,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.aditep.lab_android_v1.R;
+import com.aditep.lab_android_v1.dao.PhotoItemDao;
 import com.aditep.lab_android_v1.databinding.ActivityMainBinding;
 import com.aditep.lab_android_v1.fragment.MainFragment;
+import com.aditep.lab_android_v1.fragment.MoreInfoFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainFragment.FragmentListener {
     ActivityMainBinding binding;
     ActionBarDrawerToggle actionBarDrawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,5 +61,21 @@ public class MainActivity extends AppCompatActivity {
         if (actionBarDrawerToggle.onOptionsItemSelected(item))
         return true;
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPhotoItemClicked(PhotoItemDao dao) {
+        if (binding.moreInfoContainer == null) {
+            // Mobile
+            Intent intent = new Intent(MainActivity.this, MoreInfoActivity.class);
+            intent.putExtra("dao", dao);
+            startActivity(intent);
+        } else  {
+            // Tablet
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.moreInfoContainer, MoreInfoFragment.newInstance(dao))
+                    .commit();
+
+        }
     }
 }

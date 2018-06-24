@@ -11,13 +11,18 @@ import android.widget.TextView;
 import com.aditep.lab_android_v1.R;
 import com.aditep.lab_android_v1.dao.PhotoItemCollectionDao;
 import com.aditep.lab_android_v1.dao.PhotoItemDao;
+import com.aditep.lab_android_v1.datatype.MutableInteger;
 import com.aditep.lab_android_v1.manager.PhotoListManager;
 import com.aditep.lab_android_v1.view.PhotoListItem;
 
 public class PhotoListAdapter extends BaseAdapter {
 
     PhotoItemCollectionDao dao;
-    int lastPosition = -1;
+    MutableInteger lastPositionInteger;
+
+    public PhotoListAdapter(MutableInteger lastPositionInteger) {
+        this.lastPositionInteger = lastPositionInteger;
+    }
 
     public void setDao(PhotoItemCollectionDao dao) {
         this.dao = dao;
@@ -73,17 +78,17 @@ public class PhotoListAdapter extends BaseAdapter {
         item.setDescripionText(dao.getUsername() + "\n" + dao.getCamera());
         item.setImageUrl(dao.getImageUrl());
 
-        if (position > lastPosition) {
+        if (position > lastPositionInteger.getValue()) {
             Animation anim = AnimationUtils.loadAnimation(parent.getContext(), R.anim.up_from_bottom);
             item.startAnimation(anim);
 
-            lastPosition = position;
+            lastPositionInteger.setValue(position);
         }
         return item;
     }
 
     public void increaseLastPosition(int amount) {
 
-        lastPosition += amount;
+        lastPositionInteger.setValue(lastPositionInteger.getValue() + amount);
     }
 }

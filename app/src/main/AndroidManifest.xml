@@ -3,6 +3,7 @@
     package="com.aditep.lab_android_v1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -18,6 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MoreInfoActivity"
+            android:theme="@style/AppThemeWithActionBar"></activity>
     </application>
 
 </manifest>

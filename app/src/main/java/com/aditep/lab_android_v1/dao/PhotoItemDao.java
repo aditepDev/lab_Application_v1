@@ -1,5 +1,8 @@
 package com.aditep.lab_android_v1.dao;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PhotoItemDao {
+public class PhotoItemDao implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -54,6 +57,81 @@ public class PhotoItemDao {
     @SerializedName("aperture")
     @Expose
     private String aperture;
+
+    public PhotoItemDao() {
+    }
+
+    protected PhotoItemDao(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        link = in.readString();
+        imageUrl = in.readString();
+        caption = in.readString();
+        if (in.readByte() == 0) {
+            userId = null;
+        } else {
+            userId = in.readInt();
+        }
+        username = in.readString();
+        profilePicture = in.readString();
+        tags = in.createStringArrayList();
+        createdTime = in.readString();
+        camera = in.readString();
+        lens = in.readString();
+        focalLength = in.readString();
+        iso = in.readString();
+        shutterSpeed = in.readString();
+        aperture = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(link);
+        dest.writeString(imageUrl);
+        dest.writeString(caption);
+        if (userId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userId);
+        }
+        dest.writeString(username);
+        dest.writeString(profilePicture);
+        dest.writeStringList(tags);
+        dest.writeString(createdTime);
+        dest.writeString(camera);
+        dest.writeString(lens);
+        dest.writeString(focalLength);
+        dest.writeString(iso);
+        dest.writeString(shutterSpeed);
+        dest.writeString(aperture);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<PhotoItemDao> CREATOR = new Creator<PhotoItemDao>() {
+        @Override
+        public PhotoItemDao createFromParcel(Parcel in) {
+            return new PhotoItemDao(in);
+        }
+
+        @Override
+        public PhotoItemDao[] newArray(int size) {
+            return new PhotoItemDao[size];
+        }
+    };
 
     public Integer getId() {
         return id;
